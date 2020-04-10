@@ -18,7 +18,7 @@ inputFilePages = input_pdf.getNumPages()
 #print("inputFilePages=>",inputFilePages)
 
 watermark_page = watermark_pdf.getPage(0)
-watermark_page.compressContentStreams()
+watermark_page.compressContentStreams()#최적화
 
 #페이지마다 읽어들여서 합치기
 x = 0
