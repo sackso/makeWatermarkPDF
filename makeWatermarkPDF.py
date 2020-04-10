@@ -11,23 +11,27 @@ input_pdf = PyPDF2.PdfFileReader(input_file)
 watermark_file = open(watermark,'rb')
 watermark_pdf = PyPDF2.PdfFileReader(watermark_file)
 
-output = PyPDF2.PdfFileWriter()
 merged_file = open(merged_file,'wb')
+output_pdf = PyPDF2.PdfFileWriter()
 
 inputFilePages = input_pdf.getNumPages()
-print("inputFilePages=>",inputFilePages)
+#print("inputFilePages=>",inputFilePages)
 
 watermark_page = watermark_pdf.getPage(0)
+watermark_page.compressContentStreams()
 
+#페이지마다 읽어들여서 합치기
 x = 0
 while x < inputFilePages:
     print("",round((x/inputFilePages) * 100,2),"% completed" )
     pdf_page = input_pdf.getPage(x)    
+    pdf_page.compressContentStreams()
     pdf_page.mergePage(watermark_page)
-    output.addPage(pdf_page)
-    output.write(merged_file)
+    #pdf.filters.compress(output)
+    output_pdf.addPage(pdf_page)
     x = x + 1
 
+output_pdf.write(merged_file)
 
 merged_file.close()
 watermark_file.close()
