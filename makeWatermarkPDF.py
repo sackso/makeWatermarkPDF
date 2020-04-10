@@ -1,9 +1,9 @@
 import PyPDF2
 
 #pdf_file = "c:/tempdata/ENOVIA-R2019x-Apps-FD01.pdf"
-pdf_file = "c:/tempdata/MQL-Programmers-Guide.pdf"
-watermark = "c:/tempdata/donotcopy.pdf"
-merged_file = "c:/tempdata/merged.pdf"
+pdf_file = "MQL-Programmers-Guide.pdf"
+watermark = "donotcopy.pdf"
+merged_file = "merged.pdf"
 
 input_file = open(pdf_file,'rb')
 input_pdf = PyPDF2.PdfFileReader(input_file)
@@ -32,6 +32,9 @@ while x < inputFilePages:
     x = x + 1
 
 output_pdf.write(merged_file)
+
+
+#output_pdf.compressContentStreams()
 
 merged_file.close()
 watermark_file.close()
